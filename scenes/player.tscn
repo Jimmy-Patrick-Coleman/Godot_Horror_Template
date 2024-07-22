@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cso0dfyld8mxo"]
+[gd_scene load_steps=6 format=3 uid="uid://cso0dfyld8mxo"]
 
-[ext_resource type="Script" path="res://scripts/Player_Template/player.gd" id="1_knou2"]
+[ext_resource type="Script" path="res://scripts/player_template/player.gd" id="1_knou2"]
 [ext_resource type="Script" path="res://scripts/Interaction_System/interaction_controller.gd" id="2_yehqn"]
+[ext_resource type="PackedScene" uid="uid://pitufhj5ymfk" path="res://scenes/inventory.tscn" id="3_lkmo6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lrrft"]
 radius = 0.3
@@ -44,3 +45,5 @@ text = "[E] : Interact"
 label_settings = SubResource("LabelSettings_4h1bu")
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="Inventory" parent="." instance=ExtResource("3_lkmo6")]

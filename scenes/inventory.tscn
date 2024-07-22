@@ -1,0 +1,100 @@
+[gd_scene load_steps=4 format=3 uid="uid://pitufhj5ymfk"]
+
+[ext_resource type="Script" path="res://scripts/inventory_system/inventory.gd" id="1_m1rs1"]
+[ext_resource type="PackedScene" uid="uid://c0aihy3oqx73y" path="res://scenes/inventory_slot.tscn" id="5_njex7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eukwf"]
+font_size = 18
+
+[node name="Inventory" type="Node"]
+script = ExtResource("1_m1rs1")
+
+[node name="InventoryWindow" type="Panel" parent="."]
+custom_minimum_size = Vector2(560, 368)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -184.0
+offset_right = 280.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="SlotContainer" type="GridContainer" parent="InventoryWindow"]
+custom_minimum_size = Vector2(520, 312)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -161.0
+offset_right = 260.0
+offset_bottom = 151.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="InventorySlot" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot10" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot11" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot12" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot13" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot14" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InventorySlot15" parent="InventoryWindow/SlotContainer" instance=ExtResource("5_njex7")]
+layout_mode = 2
+
+[node name="InfoText" type="Label" parent="InventoryWindow"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_eukwf")
+horizontal_alignment = 1

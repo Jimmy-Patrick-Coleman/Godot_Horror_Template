@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=3 uid="uid://c7bvkkeevuo8f"]
+
+[ext_resource type="Texture2D" uid="uid://b3tnlcndmbfvp" path="res://textures/greywoodfloor.png" id="1_1iu25"]
+[ext_resource type="Texture2D" uid="uid://cfa7vrbuk6wk0" path="res://textures/WhitenBlackBrickv2.png" id="2_8frau"]
+[ext_resource type="PackedScene" uid="uid://cso0dfyld8mxo" path="res://scenes/player.tscn" id="3_tegd6"]
+[ext_resource type="PackedScene" uid="uid://cqa8saayvnhu2" path="res://resources/items/world_items/world_item_template.tscn" id="4_exgd1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5sqhl"]
+albedo_color = Color(0.332881, 0.332881, 0.332881, 1)
+albedo_texture = ExtResource("1_1iu25")
+metallic_specular = 0.0
+uv1_scale = Vector3(5, 5, 5)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f751s"]
+material = SubResource("StandardMaterial3D_5sqhl")
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_u705r"]
+data = PackedVector3Array(17.5, 0, 17.5, -17.5, 0, 17.5, 17.5, 0, -17.5, -17.5, 0, 17.5, -17.5, 0, -17.5, 17.5, 0, -17.5)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_id5xy"]
+
+[sub_resource type="Sky" id="Sky_mrm2d"]
+sky_material = SubResource("ProceduralSkyMaterial_id5xy")
+
+[sub_resource type="Environment" id="Environment_rrlh1"]
+background_mode = 2
+sky = SubResource("Sky_mrm2d")
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.0
+fog_height = 1.0
+fog_height_density = 3.0
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_emission_energy = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4sw7w"]
+albedo_color = Color(0.273873, 0.273873, 0.273873, 1)
+albedo_texture = ExtResource("2_8frau")
+heightmap_scale = 1.0
+uv1_scale = Vector3(16.667, 5, 16.667)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_w0lic"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_4sw7w")
+flip_faces = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_offyp"]
+data = PackedVector3Array(0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Main" type="Node3D"]
+
+[node name="Enviorment" type="Node" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Enviorment"]
+mesh = SubResource("PlaneMesh_f751s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Enviorment/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_u705r")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviorment"]
+environment = SubResource("Environment_rrlh1")
+
+[node name="Walls" type="MeshInstance3D" parent="Enviorment"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 10, 0, 2, 0)
+mesh = SubResource("BoxMesh_w0lic")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Enviorment/Walls"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviorment/Walls/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_offyp")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Enviorment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45103, 0)
+light_energy = 3.0
+shadow_enabled = true
+omni_range = 5.886
+
+[node name="player" parent="." instance=ExtResource("3_tegd6")]
+
+[node name="WorldItem_template" parent="." instance=ExtResource("4_exgd1")]
