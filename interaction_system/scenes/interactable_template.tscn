@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dau0488kypqoi"]
+
+[ext_resource type="Script" path="res://interaction_system/scripts/interactable_template.gd" id="1_5wuup"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uf6iu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b4mi0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g6uta"]
+
+[node name="interactable_template" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.9177)
+physics_material_override = SubResource("PhysicsMaterial_uf6iu")
+script = ExtResource("1_5wuup")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_b4mi0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_g6uta")

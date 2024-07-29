@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://tu7b0nhpc2b5"]
+
+[ext_resource type="Texture2D" uid="uid://brs6aci3q3c3l" path="res://inventory_system/items/icons/torchIconpng.png" id="1_hysyq"]
+[ext_resource type="Script" path="res://inventory_system/scripts/item.gd" id="2_w4d5p"]
+[ext_resource type="PackedScene" uid="uid://b1l3djujhed4l" path="res://inventory_system/items/world_items/torch_world_item.tscn" id="3_54k4s"]
+
+[resource]
+script = ExtResource("2_w4d5p")
+display_name = "Torch"
+icon = ExtResource("1_hysyq")
+max_stack_size = 2
+world_item_scene = ExtResource("3_54k4s")
+item_type = ""

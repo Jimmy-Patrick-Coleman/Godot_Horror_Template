@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnoegnxxq5mvy"]
+
+[sub_resource type="Environment" id="Environment_nsv6c"]
+background_mode = 1
+background_energy_multiplier = 0.0
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1118
+volumetric_fog_albedo = Color(0.183838, 0.20388, 0.192703, 1)
+adjustment_enabled = true
+adjustment_contrast = 1.2
+adjustment_saturation = 1.2
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_nsv6c")

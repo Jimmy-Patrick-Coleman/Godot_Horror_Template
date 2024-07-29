@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://cso0dfyld8mxo"]
+
+[ext_resource type="Script" path="res://player_template/player.gd" id="1_knou2"]
+[ext_resource type="PackedScene" uid="uid://bkoy3lq5v5uo5" path="res://horror_template/scenes/torch.tscn" id="2_05i2t"]
+[ext_resource type="PackedScene" uid="uid://pitufhj5ymfk" path="res://inventory_system/scenes/inventory.tscn" id="3_lkmo6"]
+[ext_resource type="Resource" uid="uid://h0rm2mkxu3cd" path="res://inventory_system/items/item_data/KeyCard.tres" id="4_a430q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lrrft"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="GDScript" id="GDScript_0sm7x"]
+script/source = "extends RayCast3D
+@onready var interact_prompt_label : Label = get_node(\"interaction_prompt\") # the ui label that contains the interaction text
+
+func _process(delta):
+	var object = get_collider() # the collider of the object that the ray hits
+	interact_prompt_label.text = \"\" # sets the prompt to default empty so nothing is on screen
+	
+	if object and object is interactable_object: # if the object that the ray collides with is not null and is interactable
+		if object.can_interact == false: # if the object cant interact cancel interaction
+			return
+		
+		interact_prompt_label.text = \"[E] \" + object.interaction_prompt
+		if Input.is_action_just_pressed(\"interact\"):
+			object._interact()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_4h1bu"]
+line_spacing = 1.0
+font_size = 25
+
+[node name="player" type="CharacterBody3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+script = ExtResource("1_knou2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_lrrft")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+current = true
+
+[node name="interaction_controller" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -2)
+script = SubResource("GDScript_0sm7x")
+
+[node name="interaction_prompt" type="Label" parent="Camera3D/interaction_controller"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.5
+offset_top = -66.5
+offset_right = 197.5
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "[E] : Interact"
+label_settings = SubResource("LabelSettings_4h1bu")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BasicItemHolder" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413745, -0.270412, -0.537371)
+
+[node name="torch" parent="Camera3D/BasicItemHolder" instance=ExtResource("2_05i2t")]
+transform = Transform3D(-0.0367574, -0.000692829, 0.0157611, -0.0157763, 0.00161423, -0.036722, 4.44089e-18, -0.0399614, -0.00175663, 0, 0, 0)
+
+[node name="Inventory" parent="." instance=ExtResource("3_lkmo6")]
+starter_items = Array[Resource("res://inventory_system/scripts/item.gd")]([ExtResource("4_a430q")])

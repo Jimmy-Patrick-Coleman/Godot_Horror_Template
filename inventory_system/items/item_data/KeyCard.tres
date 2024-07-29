@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://h0rm2mkxu3cd"]
+
+[ext_resource type="Texture2D" uid="uid://ci4v42bmp1hvl" path="res://inventory_system/items/icons/key card.png" id="1_ykc1e"]
+[ext_resource type="Script" path="res://inventory_system/scripts/item.gd" id="2_ihq0t"]
+[ext_resource type="PackedScene" uid="uid://cyp2a2ra68fdx" path="res://inventory_system/items/world_items/world_item_key_card.tscn" id="3_pfrsb"]
+
+[resource]
+script = ExtResource("2_ihq0t")
+display_name = "KeyCard"
+icon = ExtResource("1_ykc1e")
+max_stack_size = 5
+world_item_scene = ExtResource("3_pfrsb")
+item_type = ""

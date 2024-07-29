@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc3n2idxdsbr3"]
+
+[ext_resource type="PackedScene" uid="uid://bkoy3lq5v5uo5" path="res://horror_template/scenes/torch.tscn" id="1_ejrkt"]
+
+[node name="First attempt torch" type="Node3D"]
+
+[node name="torchModel" parent="." instance=ExtResource("1_ejrkt")]
+transform = Transform3D(-0.038637, -4.52534e-10, 0.0103528, -0.0103528, 1.68888e-09, -0.038637, 0, -0.04, -1.74846e-09, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+light_color = Color(0.968776, 1, 0.417141, 1)
+light_energy = 3.0
+shadow_enabled = true
+spot_range = 37.321
+spot_attenuation = 1.46409

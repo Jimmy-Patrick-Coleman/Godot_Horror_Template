@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2imo0pnailgh"]
+
+[ext_resource type="Script" path="res://ai_state_machine/scripts/BasicAI/AIController.gd" id="1_wrnna"]
+[ext_resource type="Script" path="res://ai_state_machine/scripts/StateMachine/StateMachine.gd" id="2_2sp3h"]
+[ext_resource type="Script" path="res://ai_state_machine/scripts/BasicAI/TemplateState.gd" id="3_dckay"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pj86y"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3ehs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ny1xq"]
+material = SubResource("StandardMaterial3D_j3ehs")
+radius = 0.3
+height = 1.8
+
+[node name="AI_Template" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.48969, 0.222073, 0)
+script = ExtResource("1_wrnna")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.904242, 0)
+shape = SubResource("CapsuleShape3D_pj86y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_ny1xq")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("default_state")]
+script = ExtResource("2_2sp3h")
+default_state = NodePath("State_Template")
+
+[node name="State_Template" type="Node" parent="StateMachine"]
+script = ExtResource("3_dckay")
+contoller_path = NodePath("../..")
+
+[connection signal="navigation_finished" from="NavigationAgent3D" to="StateMachine" method="_on_navigation_agent_3d_navigation_finished"]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://b32avweek3j4x"]
+
+[ext_resource type="Script" path="res://ai_state_machine/scripts/BasicAI/AIController.gd" id="1_8aik6"]
+[ext_resource type="Texture2D" uid="uid://duhwlxs112dhh" path="res://horror_template/textures/man.png" id="2_wq0nv"]
+[ext_resource type="Script" path="res://ai_state_machine/scripts/StateMachine/StateMachine.gd" id="3_krrhe"]
+[ext_resource type="Script" path="res://ai_state_machine/scripts/BasicAI/WanderState.gd" id="4_e0v2n"]
+[ext_resource type="Script" path="res://ai_state_machine/scripts/BasicAI/ChaseState.gd" id="5_41im4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rojda"]
+size = Vector3(0.7, 1.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t78vc"]
+size = Vector3(0.700684, 1.50537, 0.115112)
+
+[node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.945954, -4.86773)
+script = ExtResource("1_8aik6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_rojda")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00170898, -0.00366211, -0.00140381)
+visible = false
+shape = SubResource("BoxShape3D_t78vc")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0016
+texture_filter = 0
+texture = ExtResource("2_wq0nv")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("default_state")]
+script = ExtResource("3_krrhe")
+default_state = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="StateMachine"]
+script = ExtResource("4_e0v2n")
+chase_range = 10.0
+contoller_path = NodePath("../..")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("5_41im4")
+lose_interest_range = 35.0
+contoller_path = NodePath("../..")
+
+[connection signal="target_reached" from="NavigationAgent3D" to="StateMachine" method="_on_navigation_agent_3d_target_reached"]

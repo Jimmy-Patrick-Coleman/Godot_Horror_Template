@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://boat7u27y0lmt"]
+
+[ext_resource type="Script" path="res://horror_template/scripts/key_card_reader.gd" id="2_10v4b"]
+[ext_resource type="ArrayMesh" uid="uid://bbr44kcu1f3ac" path="res://inventory_system/items/models/KeyCardReader.obj" id="2_h6dp4"]
+[ext_resource type="Texture2D" uid="uid://c0i54ggytguso" path="res://horror_template/textures/KeyCardReader Mat Base Color.png" id="3_xlflu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cg3j4"]
+albedo_texture = ExtResource("3_xlflu")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cnvia"]
+size = Vector3(0.11969, 0.6073, 0.40332)
+
+[node name="KeyCardReader" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000881195, 9.53674e-07, 0.0272436)
+script = ExtResource("2_10v4b")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.3, 0, 0, 0, 1, -0.000485182, 0.00226977, 5.65946e-05)
+material_override = SubResource("StandardMaterial3D_cg3j4")
+mesh = ExtResource("2_h6dp4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00643921, 0.00482178, 0.00146484)
+shape = SubResource("BoxShape3D_cnvia")
